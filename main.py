@@ -1,26 +1,44 @@
 from cryptography.fernet import Fernet
+ 
+palavra = input("Escreva uma frase")
 
-with open ("chave.key", "rb") as filekey:
-    chave = filekey.read()
+escolha = input("Digite (f) para escolher a criptografia Fernet ou (c) para escolher a criptografia de césar ")
 
-Fernet = Fernet(chave)
+if escolha == "f":
 
+    key = Fernet.generate_key()
+  
+    fernet = Fernet(key)
+  
+    fraseCriptografada = fernet.encrypt(palavra.encode())
+  
+    fraseDescriptografada = fernet.decrypt(fraseCriptografada).decode()
 
+    print(palavra)
+    print(fraseCriptografada)
+    print(fraseDescriptografada)
 
-with open ("arquivo.txt", "rb") as arquivo:
-    conteudo_arquivo = arquivo.read()
+elif escolha == "c":
+    print(palavra)
+    def criptografar (frase):
+        mensagem = ""
+    
+        for i in palavra:
+            mensagem = mensagem + chr (ord(i) + 4)
+        return mensagem
+    
+    print(criptografar(palavra))
 
-escolha = input("Escreva criptografar para criptografar o texto ou ou descriptografar para descriptografar o texto")
+    def descriptografar (mensagem):
+        frase = ""
+    
+        for i in palavra:
+            frase = frase + chr (ord(i) - 4)
+        return frase
+    
+    
+    palavra = criptografar(palavra)   
+    print(descriptografar(palavra))
 
-if escolha == "criptografar":    
-    criptografado = Fernet.encrypt(conteudo_arquivo) 
-
-    with open ("arquivo.txt", "wb") as arquivo_criptografado:
-        arquivo_criptografado.write(criptografado)
-
-elif escolha == "descriptografar":
-    descriptografado = Fernet.decrypt(conteudo_arquivo) 
-
-    with open ("arquivo.txt", "wb") as arquivo_descriptografado:
-        arquivo_descriptografado.write(descriptografado)
-
+else:
+    print("ERRO")
