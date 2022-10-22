@@ -1,8 +1,7 @@
 from cryptography.fernet import Fernet
  
-palavra = input("Escreva uma frase")
-
 escolha = input("Digite (f) para escolher a criptografia Fernet ou (c) para escolher a criptografia de césar ")
+palavra = input("Escreva uma frase")
 
 if escolha == "f":
 
@@ -14,12 +13,12 @@ if escolha == "f":
   
     fraseDescriptografada = fernet.decrypt(fraseCriptografada).decode()
 
-    print(palavra)
-    print(fraseCriptografada)
-    print(fraseDescriptografada)
+    print("A frase digitada foi......... ",palavra)
+    print("A frase ficou .......... ", fraseCriptografada)
+    print("A frase descriptografada ficou........", fraseDescriptografada)
 
 elif escolha == "c":
-    print(palavra)
+    print("A frase digitada foi......... ",palavra)
     def criptografar (frase):
         mensagem = ""
     
@@ -27,7 +26,7 @@ elif escolha == "c":
             mensagem = mensagem + chr (ord(i) + 4)
         return mensagem
     
-    print(criptografar(palavra))
+    print("A frase ficou .......... ",criptografar(palavra))
 
     def descriptografar (mensagem):
         frase = ""
@@ -38,7 +37,7 @@ elif escolha == "c":
     
     
     palavra = criptografar(palavra)   
-    print(descriptografar(palavra))
+    print("A frase descriptografada ficou........", descriptografar(palavra))
 
 else:
     print("ERRO")
